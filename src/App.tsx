@@ -1,24 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {useAuthor} from "./hooks/author";
+import Loader from "./components/Loader";
+import Error from "./components/Error";
+import Messages from "./containers/Messages";
+import Header from "./containers/Header";
 
-function App() {
+const App = () => {
+  const {loading, error} = useAuthor();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='bg-emerald-300'>
+      {loading && <Loader/>}
+      {error && <Error error={error}/> }
+      <Header/>
+      <Messages/>
     </div>
   );
 }
